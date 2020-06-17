@@ -1,6 +1,5 @@
 package converter.nik;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -22,8 +21,8 @@ class NumConverterTest {
     @ParameterizedTest
     @MethodSource("positiveTestsStringsAndNumbersProvider")
     void converter_LegalInput_true(String romanNumber, int arabicNumber) {
-        assertEquals(romanNumber, NumConverter.convert(arabicNumber)); // Проверка перевода из арабского СИ в латинский
-        assertEquals(arabicNumber, NumConverter.convert(romanNumber)); // Проверка перевода из латинского СИ в арабский
+        assertEquals(romanNumber, NumConverter.convert(arabicNumber)); // roman to arabic convert check
+        assertEquals(arabicNumber, NumConverter.convert(romanNumber)); // arabic to roman convert check
     }
 
     static Stream<Arguments> negativeRomanTestsStringsProvider() {
@@ -31,7 +30,10 @@ class NumConverterTest {
                 arguments("", "String is empty"),
                 arguments("MMMDDDCCCLLLXXX", "Invalid string length"),
                 arguments("ABEFGH", "Invalid input"),
-                arguments("MMMM", "Number is out of range")
+                arguments("MMMM", "Illegal number"),
+                arguments("MCMCMLXX", "Illegal number"),
+                arguments("MCCCCCCLVX", "Illegal number"),
+                arguments("LM", "Illegal number")
         );
     }
 
